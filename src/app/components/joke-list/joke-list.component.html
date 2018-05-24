@@ -1,0 +1,9 @@
+<h4>View Jokes</h4>
+<joke-form (jokeCreated)="jokesService.addJoke($event)"></joke-form>
+<joke *ngFor="let j of jokesService.jokes" [joke]="j" (jokeDeleted)="jokesService.deleteJoke($event)">
+	<h4 class="setup">{{j.setup}}</h4>
+	<h4 class="punchline">{{j.punchline}}</h4>
+</joke>
+
+<!-- <h4>Content jokes</h4> -->
+<!-- <ng-content></ng-content> -->

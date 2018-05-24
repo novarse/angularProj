@@ -1,0 +1,40 @@
+<form [formGroup]="myform" (ngSubmit)="createJoke()">
+<div class="card card-block">
+  <h4 class="card-title">Create Joke</h4>
+  <div class="form-group" [ngClass]="{
+	  'has-danger': setup.invalid && setup.dirty, 
+	  'has-success': setup.valid && setup.dirty 
+	}">
+    <input type="text"
+           class="form-control"
+           placeholder="Enter the setup"
+           formControlName="setup"
+           required>
+    <div class="form-control-feedback" 
+       *ngIf="setup.invalid && setup.dirty"> 
+    	Setup is required
+  	</div>
+  </div>
+  <div class="form-group" [ngClass]="{
+	  'has-danger': punchline.invalid && punchline.dirty, 
+	  'has-success': punchline.valid && punchline.dirty 
+	}">
+    <input type="text"
+           class="form-control"
+           placeholder="Enter the punchline"
+           formControlName="punchline"
+           required>
+    <div class="form-control-feedback" 
+       *ngIf="punchline.invalid && punchline.dirty"> 
+    	Punchline is required
+  	</div>
+  </div>
+  <button type="submit"
+          class="btn btn-primary" [disabled]="myform.invalid">Create
+  </button>
+</div>
+
+<!-- <pre>{{myform.value | json}}</pre> -->
+
+</form>
+

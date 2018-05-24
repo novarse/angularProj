@@ -1,0 +1,14 @@
+<div class="card card-block" [appCardHover]="{querySelector: '.card-text'}">
+  <h4 class="card-title">
+  	<ng-content select=".setup"></ng-content>
+  </h4>
+  <p class="card-text"
+     [style.display]="'none'">
+     <ng-content select=".punchline"></ng-content>
+</p>
+  <a (click)="data.toggle()"
+     class="btn btn-warning">Tell Me
+  </a>
+  &nbsp;
+  <a class="btn btn-danger" (click)="deleteJoke()">Delete</a>  
+</div>
