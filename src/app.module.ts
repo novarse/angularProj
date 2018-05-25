@@ -30,7 +30,7 @@ const routes: Routes = [
     { path: 'find', redirectTo: 'search' },
     { path: 'search', component: SearchComponent },
     {
-      path: 'artist/:artistid',
+      path: 'artist/:artistId',
         component: ArtistComponent,
         children: [
             { path: '', redirectTo: 'tracks', pathMatch: 'full' },

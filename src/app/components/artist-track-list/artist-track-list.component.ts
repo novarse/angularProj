@@ -1,3 +1,5 @@
+import { ITunesResult } from '../../domains/itunes-result';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
@@ -11,26 +13,30 @@ export class ArtistTrackListComponent implements OnInit {
 
   private tracks: any[];
 
-    constructor(private http: HttpClient, private route: ActivatedRoute) {
-        this.route.parent.params.subscribe(params => {
-          console.log(params);
-            this.http.jsonp(
-                    `https://itunes.apple.com/lookup?id=${
-                        params["artistId"]
-                        }&entity=song`,
-                    `JSONP_CALLBACK`
-                ).subscribe(success => {
-                  console.log(success);
-                }, error => console.log(error)
-                );
-                // .toPromise()
-                // .then(res => {
-                //     console.log(res.json());
-                //     this.tracks = res.json().results.slice(1);
-                // });
+  constructor(private http: HttpClient, private route: ActivatedRoute) {
+      this.route.parent.paramMap.subscribe(params => {
+        const artistId = params.get('artistId');
+      
+        const url = `https://itunes.apple.com/lookup?id=${artistId}&entity=song&callback=JSONP_CALLBACK`;
+        console.log('url = ' + url + '; ' + artistId);
+        
+        this.http.jsonp<ITunesResult>(
+          url,
+                    `JSONP_CALLBACK`)
+          .subscribe(res => {
+            this.tracks = res.results.slice(1);
+          },
+                  (err: HttpErrorResponse) => {
+                      console.log(err.error);
+                      console.log(err.name);
+                      console.log(err.message);
+                      console.log(err.status)
+    
         });
-    }
-
+     });
+  
+  }
+  
   ngOnInit() {
   }
 
