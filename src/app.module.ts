@@ -24,14 +24,21 @@ import { PersonComponent } from './app/components/person/person.component';
 import { ArtistComponent } from './app/components/artist/artist.component';
 import { ArtistTrackListComponent } from './app/components/artist-track-list/artist-track-list.component';
 import { ArtistAlbumListComponent } from './app/components/artist-album-list/artist-album-list.component';
+import { AlwaysAuthGuard } from './app/guards/always-auth-guard';
+import { AlwaysAuthChildrenGuard } from './app/guards/always-auth-children-guard';
+import { OnlyLoggedInUsersGuard } from './app/guards/only-logged-in-users-guard';
+import { UnsearchedTermGuard } from './app/guards/unsearched-term-guard';
+import { UserService } from './app/services/user/user.service';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'find', redirectTo: 'search' },
-    { path: 'search', component: SearchComponent },
+    { path: 'search', component: SearchComponent, canDeactivate: [UnsearchedTermGuard] },
     {
       path: 'artist/:artistId',
         component: ArtistComponent,
+        canActivate: [OnlyLoggedInUsersGuard, AlwaysAuthGuard],
+        canActivateChild: [AlwaysAuthChildrenGuard],
         children: [
             { path: '', redirectTo: 'tracks', pathMatch: 'full' },
             { path: 'tracks', component: ArtistTrackListComponent },
@@ -73,7 +80,7 @@ const routes: Routes = [
     HttpClientJsonpModule,
     RouterModule.forRoot(routes, {useHash: true})
   ],
-  providers: [SearchService, PersonService],
+  providers: [SearchService, PersonService, AlwaysAuthGuard, OnlyLoggedInUsersGuard, UserService, AlwaysAuthChildrenGuard, UnsearchedTermGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -16,15 +16,19 @@ export class SearchComponent implements OnInit {
   private results: SearchItem[];
   searchField: FormControl;
 
-    constructor(private itunes: SearchService,
-                private route: ActivatedRoute,
-                private router: Router) {
-        this.route.params.subscribe(params => {
-            if (params['term']) {
-                this.doSearch(params['term'])
-            }
-        });
-    }
+  canDeactivate() {
+    return this.itunes.results.length > 0;
+  }
+
+  constructor(private itunes: SearchService,
+              private route: ActivatedRoute,
+              private router: Router) {
+      this.route.params.subscribe(params => {
+          if (params['term']) {
+              this.doSearch(params['term'])
+          }
+      });
+  }
 
   ngOnInit() {
     /*
