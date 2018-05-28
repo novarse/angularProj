@@ -2,24 +2,24 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HttpComponent } from './http.component';
 
-describe('HttpComponent', () => {
-  let component: HttpComponent;
-  let fixture: ComponentFixture<HttpComponent>;
+xdescribe( 'HttpComponent', () => {
+    let component: HttpComponent;
+    let fixture: ComponentFixture<HttpComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ HttpComponent ]
-    })
-    .compileComponents();
-  }));
+    beforeEach( async(() => {
+        TestBed.configureTestingModule( {
+            declarations: [HttpComponent]
+        } )
+            .compileComponents();
+    } ) );
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(HttpComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent( HttpComponent );
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    } );
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    it( 'should create', () => {
+        expect( component ).toBeTruthy();
+    } );
+} );

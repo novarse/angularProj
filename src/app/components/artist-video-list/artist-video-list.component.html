@@ -1,0 +1,9 @@
+<ul class="list-group">
+    <li class="list-group-item"
+        *ngFor="let video of videos">
+        <img src="{{video.artworkUrl30}}">
+        <a target="_blank"
+           href="{{video.trackViewUrl}}">{{ video.trackName }}
+        </a>
+    </li>
+</ul>

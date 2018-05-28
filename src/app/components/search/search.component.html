@@ -3,13 +3,23 @@
     <input type="search"
            class="form-control"
            placeholder="Enter search string"
+           (keydown.enter)="onSearch(search.value)"
            #search>
   </div>
   <button type="button"
           class="btn btn-primary"
           (click)="onSearch(search.value)">
     Search
-  </button>
+  </button>  
+  
+  <div style="margin: 0 10px 0 20px;">
+	  <button type="button" mat-raised-button color="primary"
+	          (click)="setSessionStorage()">Set Session storage</button>  
+	  <button type="button" mat-raised-button color="primary"
+	          (click)="getSessionStorage()">Get Session storage</button>  
+	  <button type="button" mat-raised-button color="warn"
+	          (click)="delSessionStorage()">Delete Session storage</button>  
+  </div>
 </form>
 
 <hr />

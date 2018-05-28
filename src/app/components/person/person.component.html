@@ -1,13 +1,20 @@
 <form class="form-inline">
   <div class="form-group">
-    <input type="search"
+    <label>Email</label>
+    <input type="email"
            class="form-control"
-           placeholder="Enter search string"
-           #search>
+           name="email">
   </div>
+  <div class="form-group">
+    <label>Password</label>
+    <input type="password"
+           class="form-control"
+           name="password">
+  </div>
+  <hr/>
   <button type="button"
           class="btn btn-primary"
-          (click)="doSearch(search.value)">
+          (click)="doSearch()">
     Search
   </button>
 </form>

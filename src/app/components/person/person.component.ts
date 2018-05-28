@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {PersonService} from '../../services/person/person.service';
+import {Applicant} from '../../domains/applicant';
 
 @Component({
   selector: 'person',
@@ -8,13 +9,18 @@ import {PersonService} from '../../services/person/person.service';
 })
 export class PersonComponent implements OnInit {
 
+  private applicant: Applicant;
   constructor(private personService: PersonService) { }
 
   ngOnInit() {
   }
 
-  doSearch(term: string) {
-      this.personService.getPerson();
+  doSearch() {
+       this.personService.getDetails('stephen@novarse.com', 'secret')
+         .subscribe(res => {
+           this.applicant = res;
+            console.log(this.applicant.email);
+         });
   }
 
 }
